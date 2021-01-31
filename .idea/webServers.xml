@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="3c0978d1-40d2-423a-b9d9-1a44177a2bdf" name="marisl.id.lv" url="http://marisl.id.lv">
+        <fileTransfer rootFolder="/www/budgetary" accessType="SFTP" host="marisl.id.lv" port="22" sshConfigId="1c92feac-e047-47fb-9148-067997939228" sshConfig="root@marisl.id.lv:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
