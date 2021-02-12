@@ -1,0 +1,27 @@
+body, html {
+    background: #1a202c;
+}
+
+#container {
+    width: 400px;
+    margin: 200px auto;
+}
+
+#store-form {
+    padding: 20px 20px 3px 20px;
+    background: #fff;
+}
+
+#store-form-import {
+    text-align: right;
+}
+
+input[type="submit"], .submit-button {
+    background: #1a202c;
+    color: white;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 4px;
+    font-weight: bold;
+    text-decoration: none;
+}
