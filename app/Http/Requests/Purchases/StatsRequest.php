@@ -8,8 +8,12 @@ class StatsRequest extends FormRequest {
     public function rules(): array
     {
         return [
-            'from' => 'required',
-            'to' => 'required',
+            'from' => [
+                'format:Y-m-d'
+            ],
+            'to' => [
+                'format:Y-m-d'
+            ],
             'type' => 'integer',
             'subType' => 'integer'
         ];

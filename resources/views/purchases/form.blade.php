@@ -35,6 +35,7 @@
             </form>
 
             <div id="store-form-import">
+                <a href="{{ route('stats') }}">Stats</a>
                 <a href="{{ route('importForm') }}" class="submit-button">Importēt</a>
             </div>
         </div>

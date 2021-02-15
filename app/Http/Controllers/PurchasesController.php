@@ -29,7 +29,8 @@ class PurchasesController extends Controller {
         $item->fill($data);
         $item->save();
 
-        return redirect('');
+        return redirect('')
+            ->with('success', 'OK');
     }
 
     public function importForm()
@@ -53,11 +54,6 @@ class PurchasesController extends Controller {
         } catch (\Exception $e) {
             return trigger_error($e->getMessage());
         }
-    }
-
-    public function stats(StatsRequest $request)
-    {
-        return 'purchases.stats';
     }
 
     public function importFromFile()

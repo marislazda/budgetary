@@ -8,6 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+    @if (\Session::has('success'))
+        <div style="background: green; padding: 20px; color: white; margin: 0 auto;">
+            {!! \Session::get('success') !!}
+        </div>
+    @endif
     @if($errors->any())
         <div style="background: red; padding: 20px; color: white; margin: 0 auto;">
             @foreach ($errors->all() as $error)
