@@ -86,11 +86,24 @@ class ImportService {
      */
     private function getProductMappingNames(array $products): array
     {
+        $mappings = $this->repositoryProducts->getProductMappings();
+
         foreach ($products as &$product) {
-            $product->product = $this->repositoryProducts->getProductMappingName($product->originalProduct);
+            $product->product = $this->getProductMappingName($product->originalProduct, $mappings);
         }
 
         return $products;
+    }
+
+    private function getProductMappingName(string $originalProduct, array $mappings):? string
+    {
+        foreach ($mappings as $mappingSearch => $mappingTarget) {
+            if (strpos($originalProduct, $mappingSearch) !== false) {
+                return $mappingTarget;
+            }
+        }
+
+        return null;
     }
 
     /**

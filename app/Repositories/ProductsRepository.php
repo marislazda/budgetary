@@ -6,15 +6,6 @@ use DB;
 
 class ProductsRepository {
 
-    public function getProductMappingName(string $originalName):? string
-    {
-        $result = DB::table('products_mapping')
-            ->where('original_product', 'like', '%' . $originalName . '%')
-            ->first();
-
-        return $result ? $result->product : null;
-    }
-
     public function getProductType(string $product): int
     {
         $result = DB::table('purchases')
@@ -23,6 +14,19 @@ class ProductsRepository {
             ->first();
 
         return $result ? $result->type_id : 0;
+    }
+
+    public function getProductMappings(): array
+    {
+        $mapping = [];
+        $results = DB::table('products_mapping')
+            ->get();
+
+        foreach ($results as $result) {
+            $mapping[$result->original_product] = $result->product;
+        }
+
+        return $mapping;
     }
 
 }
