@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Purchase;
+use App\Models\PurchasesInvoice;
 use App\Repositories\ProductsRepository;
 use App\Services\DTO\PurchaseDTO;
 use Exception;
@@ -26,17 +27,42 @@ class ImportService {
     {
         try {
             $this->file = $file;
+
+            $this->checkIfNotUploaded();
+
             $products = $this->getFileContent();
 
             $products = $this->getProductMappingNames($products);
             $products = $this->getProductTypes($products);
             if ($products) {
                 $this->savePurchases($products);
+                $this->savePurchasesInvoice();
             }
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
+    }
+
+    /**
+     * @throws Exception
+     */
+    private function checkIfNotUploaded(): void
+    {
+        $invoice = PurchasesInvoice::where('name', $this->file->getClientOriginalName())->first();
+        if ($invoice) {
+            throw new Exception('Invoice already uploaded');
+        }
+    }
+
+    private function savePurchasesInvoice(): void
+    {
+        $invoice = new PurchasesInvoice();
+        $invoice->fill([
+            'name' => $this->file->getClientOriginalName(),
+            'uploaded_at' => gmdate('Y-m-d H:i:s')
+        ]);
+        $invoice->save();
     }
 
     /**
@@ -137,5 +163,10 @@ class ImportService {
             $data->fill($product);
             $data->save();
         }
+    }
+
+    public function getTypeIdByName(string $name): int
+    {
+        return $this->repositoryProducts->getTypeIdByName($name);
     }
 }

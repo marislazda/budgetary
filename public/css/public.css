@@ -3,8 +3,8 @@ body, html {
 }
 
 #container {
-    width: 400px;
-    margin: 200px auto;
+    width: 80%;
+    margin: 5% auto;
 }
 
 #store-form {

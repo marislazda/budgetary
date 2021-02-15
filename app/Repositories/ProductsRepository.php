@@ -29,4 +29,12 @@ class ProductsRepository {
         return $mapping;
     }
 
+    public function getTypeIdByName(string $name): int
+    {
+        $result = DB::table('types')
+            ->where('name', $name)
+            ->first();
+
+        return $result ? $result->id : 0;
+    }
 }

@@ -8,6 +8,7 @@ use App\Http\Requests\Purchases\ImportRequest;
 use App\Models\Type;
 use App\Models\Purchase;
 use App\Services\ImportService;
+use Illuminate\Support\Facades\Storage;
 
 class PurchasesController extends Controller {
 
@@ -57,5 +58,37 @@ class PurchasesController extends Controller {
     public function stats(StatsRequest $request)
     {
         return 'purchases.stats';
+    }
+
+    public function importFromFile()
+    {
+        $file = Storage::disk('public')->path('import.csv');
+        $service = new ImportService;
+
+        if (($handle = fopen($file, "r")) !== FALSE) {
+            while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                if ($data[0] === 'Barbora') {
+                    continue;
+                }
+
+                $date = \DateTime::createFromFormat('d.m', $data[2]);
+
+                $purchaseData = [
+                    'created_at' => $date->format('Y-m-d'),
+                    'product' => $data[0],
+                    'price' => str_replace(',', '.', $data[3]),
+                    'type_id' => $service->getTypeIdByName($data[1]),
+                    'type' => $data[1]
+               ];
+
+                $item = new Purchase;
+                $item->fill($purchaseData);
+                $item->save();
+
+            }
+            fclose($handle);
+        }
+
+        die('ok');
     }
 }
