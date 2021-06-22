@@ -34,6 +34,7 @@ class ImportService {
 
             $products = $this->getProductMappingNames($products);
             $products = $this->getProductTypes($products);
+
             if ($products) {
                 $this->savePurchases($products);
                 $this->savePurchasesInvoice();

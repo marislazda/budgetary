@@ -9,13 +9,12 @@ class StatsRequest extends FormRequest {
     {
         return [
             'from' => [
-                'format:Y-m-d'
+                'date_format:Y-m-d'
             ],
             'to' => [
-                'format:Y-m-d'
+                'date_format:Y-m-d'
             ],
-            'type' => 'integer',
-            'subType' => 'integer'
+            'typeId' => 'integer',
         ];
     }
 

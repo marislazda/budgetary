@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Purchases\StatsRequest;
 use App\Http\Requests\Purchases\StoreRequest;
 use App\Http\Requests\Purchases\ImportRequest;
 use App\Models\Type;

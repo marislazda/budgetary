@@ -3,7 +3,7 @@
 @section('content')
     <div id="container">
         <div id="store-form">
-            <form method="post" action="{{ route('form.submit') }}">
+            <form method="post" action="{{ route('form.submit') }}" autocomplete="off">
                 {{ csrf_field() }}
                 <div class="form-group row">
                     <label for="product" class="col-sm-3 col-form-label">
